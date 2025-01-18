@@ -80,7 +80,9 @@ const HouseListings = () => {
               <option value="">Select</option>
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
-              <option value="Studio">Studio</option>
+              <option value="Basement">Studio</option>
+              <option value="Condo">Studio</option>
+              <option value="">Studio</option>
             </select>
           </label>
           <br />
