@@ -1,0 +1,7 @@
+{
+  "name": "IonicMVP",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
