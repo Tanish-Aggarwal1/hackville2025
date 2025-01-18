@@ -6,7 +6,7 @@ const RoommateFinder: React.FC = () => {
     const [gender, setGender] = useState<string>('');
     const [nationality, setNationality] = useState<string>('');
     const [employmentType, setEmploymentType] = useState<string>('');
-    const [ageRange, setAgeRange] = useState<number[]>([18, 35]);
+    const [ageRange, setAgeRange] = useState<{ lower: number, upper: number }>({ lower: 18, upper: 35 });
     const [relationshipStatus, setRelationshipStatus] = useState<string>('');
     const [cleanliness, setCleanliness] = useState<string>('');
     const [results, setResults] = useState<any[]>([]);
@@ -44,7 +44,7 @@ const RoommateFinder: React.FC = () => {
                 </IonItem>
                 <IonItem>
                     <IonLabel>Nationality</IonLabel>
-                    <IonInput value={nationality} placeholder="Enter Nationality" onIonChange={e => setNationality(e.detail.value)} />
+                    <IonInput value={nationality} placeholder="Enter Nationality" onIonChange={e => setNationality(e.detail.value as string)} />
                 </IonItem>
                 <IonItem>
                     <IonLabel>Employment Type</IonLabel>
@@ -55,7 +55,7 @@ const RoommateFinder: React.FC = () => {
                 </IonItem>
                 <IonItem>
                     <IonLabel>Age Range</IonLabel>
-                    <IonRange min={18} max={60} step={1} dualKnobs={true} value={ageRange} onIonChange={e => setAgeRange(e.detail.value as number[])} />
+                    <IonRange min={18} max={60} step={1} dualKnobs={true} value={ageRange} pin={true}  onIonChange={e => setAgeRange(e.detail.value as { lower: number, upper: number })} />
                 </IonItem>
                 <IonItem>
                     <IonLabel>Relationship Status</IonLabel>
