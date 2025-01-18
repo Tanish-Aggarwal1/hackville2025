@@ -1,5 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/react';
 import { useState } from 'react';
+import Card from '../components/Card';
 import './Tab1.css';
 
 const Tab1: React.FC = () => {
@@ -11,6 +12,18 @@ const Tab1: React.FC = () => {
       (event.target as HTMLIonInfiniteScrollElement).complete();
     }, 500);
   };
+
+  function getInitialState() {
+    return {
+      x: 0,
+      y: 0,
+      initialX: 0,
+      initialY: 0,
+      dragging: "none"
+    }
+  };
+
+  
 
   return (
     <IonPage>
@@ -26,15 +39,16 @@ const Tab1: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         {items.map((_, index) => (
-          <IonCard key={index}>
-              <img src="themepic.webp" alt="" />
-            <IonCardHeader>
-              <IonCardTitle>Friend {index + 1}</IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-              This is friend number {index + 1}.
-            </IonCardContent>
-          </IonCard>
+          <Card index={index}></Card>
+          // <IonCard key={index}>
+          //     <img src="themepic.webp" alt="" />
+          //   <IonCardHeader>
+          //     <IonCardTitle>Friend {index + 1}</IonCardTitle>
+          //   </IonCardHeader>
+          //   <IonCardContent>
+          //     This is friend number {index + 1}.
+          //   </IonCardContent>
+          // </IonCard>
         ))}
         <IonInfiniteScroll onIonInfinite={loadMore}>
           <IonInfiniteScrollContent loadingText="Loading more friends..."></IonInfiniteScrollContent>
