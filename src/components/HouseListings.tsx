@@ -10,9 +10,13 @@ const HouseListings = () => {
     squareFeet: "",
     sharing: "",
   });
-  const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState([{
+    title: "",
+    location: "",
+    price: "",
+  }]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setPreferences({ ...preferences, [name]: value });
   };
@@ -38,7 +42,7 @@ const HouseListings = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     fetchListings(); // Fetch AI-powered results
   };
