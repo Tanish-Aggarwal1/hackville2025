@@ -394,17 +394,17 @@ Done (as part of the dependency upgrade — the build had to pass to verify it):
       `server/mock-api.cjs` — it's a Node script, not client code.
 - [x] Dead `getInitialState()` removed from `Tab1.tsx`; missing `key` prop added.
 - [x] `npm run build`, `lint`, `typecheck` and `test.unit` all pass.
+- [x] **CI added** (`.github/workflows/ci.yml`): `npm ci` → `lint` → `typecheck`
+      → `test.unit` → `build`, on every PR and every push to `main`. This is what
+      would have caught the original breakage.
 
 Still open:
 
 - [ ] Un-nest `IonPage` in `RoommateFinder` (a component rendered inside a page
       must not render its own page).
-- [ ] Fix `cypress/e2e/test.cy.ts`, which asserts text that no longer exists.
-      Cypress' binary can't be fetched in the sandboxed CI environment, so this
-      needs verifying locally.
-- [ ] **Add CI** (`.github/workflows/ci.yml`): `npm ci` → `lint` → `typecheck` →
-      `build` → `test.unit`, on every push and PR. This is what would have caught
-      the original breakage.
+- [ ] Fix `cypress/e2e/test.cy.ts`, which asserts text that no longer exists,
+      then add an e2e job to CI. It's deliberately left out of the workflow for
+      now so CI reflects real breakage rather than a known-bad spec.
 - [ ] Delete `routes.js` (merged from PR #1). It references an undefined `app`,
       has no imports or exports, hardcodes `YOUR_API_KEY`, and calls OpenAI's
       retired `text-davinci-003` completions endpoint. It is also the
