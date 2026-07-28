@@ -28,7 +28,7 @@ const roommates = [
     // Add more mock data as needed
 ];
 
-app.post('/api/find-roommates', (req: any, res: any) => {
+app.post('/api/find-roommates', (req, res) => {
     const { gender, nationality, employmentType, ageRange, relationshipStatus, cleanliness } = req.body;
 
     const filteredRoommates = roommates.filter(roommate => {

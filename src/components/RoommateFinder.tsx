@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonSelect, IonSelectOption, IonRange, IonButton, IonList, IonItem, IonLabel } from '@ionic/react';
 import axios from 'axios';
 
+interface RoommateResult {
+    name: string;
+    age: number;
+    gender: string;
+    nationality: string;
+    employmentType: string;
+    relationshipStatus: string;
+    cleanliness: string;
+    description: string;
+}
+
 const RoommateFinder: React.FC = () => {
     const [gender, setGender] = useState<string>('');
     const [nationality, setNationality] = useState<string>('');
@@ -9,7 +20,7 @@ const RoommateFinder: React.FC = () => {
     const [ageRange, setAgeRange] = useState<{ lower: number, upper: number }>({ lower: 18, upper: 35 });
     const [relationshipStatus, setRelationshipStatus] = useState<string>('');
     const [cleanliness, setCleanliness] = useState<string>('');
-    const [results, setResults] = useState<any[]>([]);
+    const [results, setResults] = useState<RoommateResult[]>([]);
 
     const findRoommates = async () => {
         try {

@@ -387,36 +387,46 @@ each one leaves the app in a shippable state.
 
 Nothing else can be verified until `npm run build` passes.
 
-- Rewrite `Card.tsx` on `react-tinder-card`, deleting the broken gesture block.
-  Sketch:
+Done (as part of the dependency upgrade — the build had to pass to verify it):
 
-  ```tsx
-  import TinderCard from 'react-tinder-card';
+- [x] `Card.tsx` rewritten on `react-tinder-card`, broken gesture block deleted.
+- [x] `PersonalityAnalysis.tsx` moved out of `src/components/` to
+      `server/mock-api.cjs` — it's a Node script, not client code.
+- [x] Dead `getInitialState()` removed from `Tab1.tsx`; missing `key` prop added.
+- [x] `npm run build`, `lint`, `typecheck` and `test.unit` all pass.
 
-  <TinderCard
-    onSwipe={(dir) => onDecision(dir === 'right' ? 'like' : 'pass')}
-    preventSwipe={['up', 'down']}
-    className="swipe-card"
-  >
-    {/* IonCard contents */}
-  </TinderCard>
-  ```
-- Move `PersonalityAnalysis.tsx` out of `src/components/` — either delete it or
-  park it at `server/mock-api.js` until the real backend lands. It must not sit
-  in the client tree.
-- Delete the dead `getInitialState()` in `Tab1.tsx`; add the missing `key` prop.
-- Un-nest `IonPage` in `RoommateFinder` (a component rendered inside a page must
-  not render its own page).
-- Fix `cypress/e2e/test.cy.ts`, which asserts text that no longer exists.
-- **Add CI** (`.github/workflows/ci.yml`): `npm ci` → `lint` → `tsc --noEmit` →
-  `build` → `test.unit`, on every push and PR. This is what would have caught the
-  current breakage.
-- Fix app identity: real `appId` (e.g. `ca.roomiematch.app`), drop the stray
-  backslash in `appName` (present in both `capacitor.config.ts` and
-  `ionic.config.json`), real `<title>`, real `manifest.json`.
-- Write a README: what it is, how to run it, how to contribute.
+Still open:
+
+- [ ] Un-nest `IonPage` in `RoommateFinder` (a component rendered inside a page
+      must not render its own page).
+- [ ] Fix `cypress/e2e/test.cy.ts`, which asserts text that no longer exists.
+      Cypress' binary can't be fetched in the sandboxed CI environment, so this
+      needs verifying locally.
+- [ ] **Add CI** (`.github/workflows/ci.yml`): `npm ci` → `lint` → `typecheck` →
+      `build` → `test.unit`, on every push and PR. This is what would have caught
+      the original breakage.
+- [ ] Delete `routes.js` (merged from PR #1). It references an undefined `app`,
+      has no imports or exports, hardcodes `YOUR_API_KEY`, and calls OpenAI's
+      retired `text-davinci-003` completions endpoint. It is also the
+      fabricated-listings feature §2 argues against. It's currently excluded from
+      lint so it can't fail the build, but it should go.
+- [ ] Fix app identity: real `appId` (e.g. `ca.roomiematch.app`), drop the stray
+      backslash in `appName` (present in both `capacitor.config.ts` and
+      `ionic.config.json`), real `<title>`, real `manifest.json`.
+- [ ] Write a README: what it is, how to run it, how to contribute.
 
 **Exit:** green CI, app builds, one honest placeholder screen.
+
+#### Dependency pins worth knowing about
+
+The toolchain is otherwise on latest. Three things are deliberately held back,
+and all three are documented in `package.json` under `"comments"`:
+
+| Package | Held at | Why |
+|---|---|---|
+| `react-router` / `react-router-dom` | 5.x | `@ionic/react-router` peer-requires `^5.0.1`. v6/v7 is impossible while Ionic's router is in use — moving would mean dropping `@ionic/react-router` entirely. |
+| `typescript` | 6.0.3 | `typescript-eslint` hard-errors on TS 7.0 (upstream issue #10940 tracks TS ≥7.1). TS 7 works fine for `tsc` alone; it's linting that breaks. Revisit once typescript-eslint ships support. |
+| `react-tinder-card` | 1.6.4 (last release) | Its declared peers are stale (React ≤18, react-spring ^9). Both work on React 19 / react-spring 10; `overrides` in `package.json` accept the newer versions. If it ever breaks, `@use-gesture/react` + `framer-motion` is the fallback named in §6. |
 
 ### Phase 1 — Foundation _(2–3 days)_
 
