@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, typecheck, test, build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      # The Cypress binary is only needed by `npm run test.e2e`, which is not
+      # part of this job (see the note at the bottom of the file).
+      - name: Install dependencies
+        run: npm ci
+        env:
+          CYPRESS_INSTALL_BINARY: '0'
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test.unit
+
+      - name: Build
+        run: npm run build
+
+# Not yet wired up: `npm run test.e2e`. cypress/e2e/test.cy.ts still asserts
+# text ("Tab 1 page") that no longer exists in the app, so it fails regardless
+# of the code under test. Fix that spec first, then add an e2e job that drops
+# CYPRESS_INSTALL_BINARY, starts the app, and points Cypress at it. Note that
+# cypress.config.ts currently sets baseUrl to the dev server's port (5173),
+# so either run `npm run dev` or change the baseUrl to match `npm run preview`.
