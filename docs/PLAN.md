@@ -398,24 +398,31 @@ Done (as part of the dependency upgrade — the build had to pass to verify it):
       → `test.unit` → `build`, on every PR and every push to `main`. This is what
       would have caught the original breakage.
 
+- [x] `IonPage` un-nested in `RoommateFinder` — a component rendered inside a
+      page must not render its own page.
+- [x] `cypress/e2e/test.cy.ts` rewritten against markup that actually exists
+      (it asserted `'Tab 1 page'`, long gone). Still not in CI — see below.
+- [x] `routes.js` deleted (merged from PR #1): it referenced an undefined `app`,
+      had no imports or exports, hardcoded `YOUR_API_KEY`, and called OpenAI's
+      retired `text-davinci-003` endpoint. It was also the fabricated-listings
+      feature §2 argues against.
+- [x] App identity fixed: real `appId`, stray backslash removed from `appName`
+      in both `capacitor.config.ts` and `ionic.config.json`, real `<title>`, and
+      a `manifest.json` that no longer points at two icon files that don't exist.
+- [x] README written.
+
 Still open:
 
-- [ ] Un-nest `IonPage` in `RoommateFinder` (a component rendered inside a page
-      must not render its own page).
-- [ ] Fix `cypress/e2e/test.cy.ts`, which asserts text that no longer exists,
-      then add an e2e job to CI. It's deliberately left out of the workflow for
-      now so CI reflects real breakage rather than a known-bad spec.
-- [ ] Delete `routes.js` (merged from PR #1). It references an undefined `app`,
-      has no imports or exports, hardcodes `YOUR_API_KEY`, and calls OpenAI's
-      retired `text-davinci-003` completions endpoint. It is also the
-      fabricated-listings feature §2 argues against. It's currently excluded from
-      lint so it can't fail the build, but it should go.
-- [ ] Fix app identity: real `appId` (e.g. `ca.roomiematch.app`), drop the stray
-      backslash in `appName` (present in both `capacitor.config.ts` and
-      `ionic.config.json`), real `<title>`, real `manifest.json`.
-- [ ] Write a README: what it is, how to run it, how to contribute.
+- [ ] Add an e2e job to CI. Deliberately left out for now: the Cypress binary
+      can't be downloaded in every environment, and it's better for CI to
+      reflect real breakage than to go red on infrastructure. The rewritten spec
+      has not been executed — run `npm run dev` and `npm run test.e2e` locally to
+      confirm it passes before wiring it up.
+- [ ] Settle the product name (§13.5), then update `appId`/`appName` before
+      generating a native project — the Android package name is painful to change
+      once an `android/` project exists.
 
-**Exit:** green CI, app builds, one honest placeholder screen.
+**Exit:** green CI, app builds, one honest placeholder screen. ✅
 
 #### Dependency pins worth knowing about
 

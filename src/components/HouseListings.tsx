@@ -10,11 +10,9 @@ const HouseListings = () => {
     squareFeet: "",
     sharing: "",
   });
-  const [listings, setListings] = useState([{
-    title: "",
-    location: "",
-    price: "",
-  }]);
+  const [listings, setListings] = useState<
+    { title: string; location: string; price: string }[]
+  >([]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonSelect, IonSelectOption, IonRange, IonButton, IonList, IonItem, IonLabel } from '@ionic/react';
+import { IonListHeader, IonInput, IonSelect, IonSelectOption, IonRange, IonButton, IonList, IonItem, IonLabel } from '@ionic/react';
 import axios from 'axios';
 
 interface RoommateResult {
@@ -38,14 +38,13 @@ const RoommateFinder: React.FC = () => {
         }
     };
 
+    // Rendered inside Tab2's IonPage, so this must not declare a page of its own.
     return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Roommate Finder</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent>
+        <>
+            <IonList>
+                <IonListHeader>
+                    <IonLabel>Roommate Finder</IonLabel>
+                </IonListHeader>
                 <IonItem>
                     <IonLabel>Gender</IonLabel>
                     <IonSelect value={gender} placeholder="Select Gender" onIonChange={e => setGender(e.detail.value)}>
@@ -82,25 +81,25 @@ const RoommateFinder: React.FC = () => {
                         <IonSelectOption value="Messy">Messy</IonSelectOption>
                     </IonSelect>
                 </IonItem>
-                <IonButton expand="full" onClick={findRoommates}>Find Roommates</IonButton>
-                <IonList>
-                    {results.map((roommate, index) => (
-                        <IonItem key={index}>
-                            <IonLabel>
-                                <h2>{roommate.name}</h2>
-                                <p>Age: {roommate.age}</p>
-                                <p>Gender: {roommate.gender}</p>
-                                <p>Nationality: {roommate.nationality}</p>
-                                <p>Employment Type: {roommate.employmentType}</p>
-                                <p>Relationship Status: {roommate.relationshipStatus}</p>
-                                <p>Cleanliness: {roommate.cleanliness}</p>
-                                <p>Description: {roommate.description}</p>
-                            </IonLabel>
-                        </IonItem>
-                    ))}
-                </IonList>
-            </IonContent>
-        </IonPage>
+            </IonList>
+            <IonButton expand="block" onClick={findRoommates}>Find Roommates</IonButton>
+            <IonList>
+                {results.map((roommate, index) => (
+                    <IonItem key={index}>
+                        <IonLabel>
+                            <h2>{roommate.name}</h2>
+                            <p>Age: {roommate.age}</p>
+                            <p>Gender: {roommate.gender}</p>
+                            <p>Nationality: {roommate.nationality}</p>
+                            <p>Employment Type: {roommate.employmentType}</p>
+                            <p>Relationship Status: {roommate.relationshipStatus}</p>
+                            <p>Cleanliness: {roommate.cleanliness}</p>
+                            <p>Description: {roommate.description}</p>
+                        </IonLabel>
+                    </IonItem>
+                ))}
+            </IonList>
+        </>
     );
 };
 

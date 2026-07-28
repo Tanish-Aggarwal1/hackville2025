@@ -1,6 +1,18 @@
-describe('My First Test', () => {
-  it('Visits the app root url', () => {
+describe('App shell', () => {
+  it('redirects the root url to the first tab', () => {
     cy.visit('/')
-    cy.contains('ion-content', 'Tab 1 page')
+    cy.location('pathname').should('eq', '/tab1')
+    cy.get('ion-title').first().should('contain.text', 'Find Friends')
+  })
+
+  it('renders the swipe cards', () => {
+    cy.visit('/')
+    cy.get('ion-card').should('have.length.greaterThan', 0)
+  })
+
+  it('navigates between tabs', () => {
+    cy.visit('/')
+    cy.get('ion-tab-button[tab="tab2"]').click()
+    cy.location('pathname').should('eq', '/tab2')
   })
 })
