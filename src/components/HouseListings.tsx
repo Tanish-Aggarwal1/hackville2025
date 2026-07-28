@@ -16,7 +16,9 @@ const HouseListings = () => {
     price: "",
   }]);
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setPreferences({ ...preferences, [name]: value });
   };
@@ -42,7 +44,7 @@ const HouseListings = () => {
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetchListings(); // Fetch AI-powered results
   };
