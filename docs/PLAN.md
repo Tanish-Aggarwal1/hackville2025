@@ -248,12 +248,9 @@ images. Refill when 5 cards remain. Cache the queue so a reload doesn't reshuffl
 
 ## 6. Architecture decisions
 
-### Backend: use Supabase
+### Backend: Supabase (decided)
 
-The repo's `src/appwrite/` folder signals the original intent, but it's empty —
-there's no sunk cost, so this is a free decision.
-
-**Recommendation: Supabase.** Postgres means the compatibility query, geo
+**Supabase.** Postgres means the compatibility query, geo
 filtering, and "who liked me" are all just SQL; Row Level Security enforces
 privacy (e.g. `address_exact` only readable by matched users) at the database
 rather than in client code we'd have to trust; Realtime gives us chat with no
@@ -573,8 +570,10 @@ just whether the app runs:
 
 1. **Scope of the launch market** — one campus (Conestoga? Waterloo region?) or
    city-wide? Affects cold-start strategy more than any technical decision here.
-2. **Backend**: Supabase (recommended) or Appwrite (already gestured at)? Does
-   anyone on the team already know one?
+2. ~~**Backend**: Supabase or Appwrite?~~ **Decided: Supabase.** Schema +
+   RLS policies live in `supabase/schema.sql`; typed client in
+   `src/lib/supabase.ts`. Still needed: create the actual Supabase project
+   and drop its URL/anon key into `.env.local` (see `.env.example`).
 3. **Deadline**: is there a demo date driving this, or is it an open-ended
    rebuild? Determines whether we take the weekend-cut path in §9.
 4. **Team size and split** — the phases parallelise cleanly as
