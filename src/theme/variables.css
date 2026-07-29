@@ -1,2 +1,42 @@
-/* For information on how to create your own theme, please see:
-http://ionicframework.com/docs/theming/ */
+/* Roommate Finder design tokens. Ionic ships sane defaults for anything not
+   overridden here (tertiary, warning, dark, medium, light) — only the brand
+   colors actually used by this app are set. See:
+   http://ionicframework.com/docs/theming/ */
+
+:root {
+  /* Primary — brand, headers, active tab, primary actions */
+  --ion-color-primary: #5b5fef;
+  --ion-color-primary-rgb: 91, 95, 239;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #5256d2;
+  --ion-color-primary-tint: #6d71f1;
+
+  /* Secondary — the "like" accent (heart, right-swipe) */
+  --ion-color-secondary: #ff6b6b;
+  --ion-color-secondary-rgb: 255, 107, 107;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #e05e5e;
+  --ion-color-secondary-tint: #ff7a7a;
+
+  /* Success — matches, confirmations */
+  --ion-color-success: #2dd4bf;
+  --ion-color-success-rgb: 45, 212, 191;
+  --ion-color-success-contrast: #073b35;
+  --ion-color-success-contrast-rgb: 7, 59, 53;
+  --ion-color-success-shade: #28bba8;
+  --ion-color-success-tint: #42d8c5;
+
+  /* Danger — pass/reject, destructive actions */
+  --ion-color-danger: #ff4757;
+  --ion-color-danger-rgb: 255, 71, 87;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #e03e4c;
+  --ion-color-danger-tint: #ff5968;
+
+  /* App-level tokens: consistent rounding/elevation for cards, deck, sheets */
+  --app-radius: 16px;
+  --app-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}

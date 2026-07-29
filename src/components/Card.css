@@ -1,0 +1,46 @@
+.swipe-card-wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.swipe-card {
+  width: 100%;
+  height: 100%;
+}
+
+.swipe-card-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.swipe-card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 45%);
+}
+
+.swipe-card-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  color: #fff;
+}
+
+.swipe-card-info h2 {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.swipe-card-info p {
+  margin: 0;
+  opacity: 0.9;
+}
