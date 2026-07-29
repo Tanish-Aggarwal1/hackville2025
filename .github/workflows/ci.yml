@@ -41,9 +41,23 @@ jobs:
       - name: Build
         run: npm run build
 
-# Not yet wired up: `npm run test.e2e`. cypress/e2e/test.cy.ts still asserts
-# text ("Tab 1 page") that no longer exists in the app, so it fails regardless
-# of the code under test. Fix that spec first, then add an e2e job that drops
-# CYPRESS_INSTALL_BINARY, starts the app, and points Cypress at it. Note that
-# cypress.config.ts currently sets baseUrl to the dev server's port (5173),
-# so either run `npm run dev` or change the baseUrl to match `npm run preview`.
+  e2e:
+    name: Cypress e2e
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - uses: cypress-io/github-action@v6
+        with:
+          install: false
+          start: npm run dev
+          wait-on: 'http://localhost:5173'
