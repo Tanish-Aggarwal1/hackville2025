@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText } from '@ionic/react';
-import './Tab3.css';
+import './ProfilePage.css';
 
-const Tab3: React.FC = () => {
+const ProfilePage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -23,4 +23,4 @@ const Tab3: React.FC = () => {
   );
 };
 
-export default Tab3;
+export default ProfilePage;
