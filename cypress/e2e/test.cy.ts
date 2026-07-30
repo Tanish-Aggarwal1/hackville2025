@@ -1,8 +1,8 @@
 describe('App shell', () => {
-  it('redirects the root url to the first tab', () => {
+  it('redirects the root url to Discover', () => {
     cy.visit('/')
-    cy.location('pathname').should('eq', '/tab1')
-    cy.get('ion-title').first().should('contain.text', 'Find Friends')
+    cy.location('pathname').should('eq', '/discover')
+    cy.get('ion-title').first().should('contain.text', 'Discover')
   })
 
   it('renders the swipe cards', () => {
@@ -12,7 +12,7 @@ describe('App shell', () => {
 
   it('navigates between tabs', () => {
     cy.visit('/')
-    cy.get('ion-tab-button[tab="tab2"]').click()
-    cy.location('pathname').should('eq', '/tab2')
+    cy.get('ion-tab-button[tab="listings"]').click()
+    cy.location('pathname').should('eq', '/listings')
   })
 })
