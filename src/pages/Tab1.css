@@ -1,0 +1,5 @@
+.swipe-deck {
+  position: relative;
+  height: calc(100vh - 220px);
+  margin: 16px;
+}

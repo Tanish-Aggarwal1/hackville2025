@@ -26,9 +26,11 @@ const Tab1: React.FC = () => {
             <IonTitle size="large">Find Friends</IonTitle>
           </IonToolbar>
         </IonHeader>
-        {items.map((_, index) => (
-          <Card key={index} index={index} />
-        ))}
+        <div className="swipe-deck">
+          {items.map((_, index) => (
+            <Card key={index} index={index} />
+          ))}
+        </div>
         <IonInfiniteScroll onIonInfinite={loadMore}>
           <IonInfiniteScrollContent loadingText="Loading more friends..."></IonInfiniteScrollContent>
         </IonInfiniteScroll>

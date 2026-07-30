@@ -7,7 +7,7 @@ describe('App shell', () => {
 
   it('renders the swipe cards', () => {
     cy.visit('/')
-    cy.get('ion-card').should('have.length.greaterThan', 0)
+    cy.get('.swipe-card').should('have.length.greaterThan', 0)
   })
 
   it('navigates between tabs', () => {
