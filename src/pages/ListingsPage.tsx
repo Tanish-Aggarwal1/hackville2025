@@ -1,9 +1,9 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import HouseListings from '../components/HouseListings';
 import RoommateFinder from '../components/RoommateFinder';
-import './Tab2.css';
+import './ListingsPage.css';
 
-const Tab2: React.FC = () => {
+const ListingsPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -24,4 +24,4 @@ const Tab2: React.FC = () => {
   );
 };
 
-export default Tab2;
+export default ListingsPage;

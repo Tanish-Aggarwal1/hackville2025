@@ -1,9 +1,9 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/react';
 import { useState } from 'react';
 import Card from '../components/Card';
-import './Tab1.css';
+import './DiscoverPage.css';
 
-const Tab1: React.FC = () => {
+const DiscoverPage: React.FC = () => {
   const [items, setItems] = useState(Array.from({ length: 20 }));
 
   const loadMore = (event: CustomEvent<void>) => {
@@ -17,13 +17,13 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Find Friends</IonTitle>
+          <IonTitle>Discover</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Find Friends</IonTitle>
+            <IonTitle size="large">Discover</IonTitle>
           </IonToolbar>
         </IonHeader>
         <div className="swipe-deck">
@@ -39,4 +39,4 @@ const Tab1: React.FC = () => {
   );
 };
 
-export default Tab1;
+export default DiscoverPage;
